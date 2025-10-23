@@ -1,4 +1,5 @@
-﻿<mah:MetroWindow x:Class="WpfTemplate.North.UI.Shell.Views.MainWindow"
+﻿<mah:MetroWindow
+    x:Class="WpfTemplate.North.UI.Shell.Views.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -18,7 +19,304 @@
     WindowStartupLocation="CenterScreen"
     WindowStyle="None"
     mc:Ignorable="d">
-	<Grid>
+    <Window.Resources>
+        <Style x:Key="logoButton" TargetType="{x:Type Button}">
+            <Setter Property="Margin" Value="5,5,10,0" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
 
-    </Grid>
+            <Setter Property="OverridesDefaultStyle" Value="True" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Opacity" Value="10" />
+                    <Setter Property="Background" Value="Transparent" />
+                    <Setter Property="Cursor" Value="Hand" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="logoText" TargetType="{x:Type TextBlock}">
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="FontSize" Value="22" />
+            <Setter Property="Foreground" Value="#1e3431" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Text" Value="{Binding Title}" />
+        </Style>
+
+        <Style x:Key="topButton" TargetType="Button">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Width" Value="15" />
+            <Setter Property="Height" Value="15" />
+            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="50">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#e6e6e6" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="topButtonEllipse" TargetType="Ellipse">
+            <Setter Property="Width" Value="15" />
+            <Setter Property="Height" Value="15" />
+
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Opacity" Value="0.4" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Storyboard x:Key="SlideOnLoad">
+            <DoubleAnimation
+                Storyboard.TargetProperty="Opacity"
+                From="0.0"
+                To="1.0"
+                Duration="0:0:1">
+                <DoubleAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseOut" />
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            <ThicknessAnimation
+                Storyboard.TargetProperty="Margin"
+                From="0,100,0,0"
+                To="0,0,0,0"
+                Duration="0:0:1">
+                <ThicknessAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseOut" />
+                </ThicknessAnimation.EasingFunction>
+            </ThicknessAnimation>
+        </Storyboard>
+    </Window.Resources>
+
+    <DockPanel>
+        <DockPanel.Triggers>
+            <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                <BeginStoryboard Storyboard="{StaticResource SlideOnLoad}" />
+            </EventTrigger>
+        </DockPanel.Triggers>
+
+        <!--  The Title bar section  -->
+        <Border
+            Height="50"
+            Background="White"
+            BorderBrush="{StaticResource SwayAccentDark}"
+            BorderThickness="1"
+            CornerRadius="40 40 0 0"
+            DockPanel.Dock="Top">
+            <Border.InputBindings>
+                <MouseBinding Command="{Binding MoveWindowCommand}" MouseAction="LeftClick" />
+                <MouseBinding Command="{Binding MaximizeWindowCommand}" MouseAction="LeftDoubleClick" />
+            </Border.InputBindings>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="100" />
+                </Grid.ColumnDefinitions>
+
+                <!--  The Titlebar  -->
+                <!--  Sway Logo with Application Name  -->
+                <Image Margin="17,5,0,5" Source="{StaticResource SwayLogo}" />
+
+                <TextBlock
+                    Grid.ColumnSpan="3"
+                    HorizontalAlignment="Center"
+                    FontFamily="Arial"
+                    Style="{StaticResource logoText}" />
+
+                <!--  Buttons with Ellipses  -->
+                <StackPanel
+                    Grid.Column="2"
+                    Margin="22,15,0,15"
+                    HorizontalAlignment="Left"
+                    Orientation="Horizontal">
+                    <Button
+                        Command="{Binding MinimizeWindowCommand}"
+                        Style="{StaticResource topButton}"
+                        ToolTip="Minimize Window"
+                        ToolTipService.InitialShowDelay="500">
+                        <Ellipse Fill="#ffbf2f" Style="{StaticResource topButtonEllipse}" />
+                    </Button>
+                    <Button
+                        Margin="7,0"
+                        Command="{Binding MaximizeWindowCommand}"
+                        Style="{StaticResource topButton}"
+                        ToolTip="{Binding MaximizeBtnTooltip}"
+                        ToolTipService.InitialShowDelay="500">
+                        <Ellipse Fill="#2acb42" Style="{StaticResource topButtonEllipse}" />
+                    </Button>
+                    <Button
+                        Command="{Binding ShutdownWindowCommand}"
+                        Style="{StaticResource topButton}"
+                        ToolTip="Close Application"
+                        ToolTipService.InitialShowDelay="500">
+                        <Ellipse Fill="#ff6258" Style="{StaticResource topButtonEllipse}" />
+                    </Button>
+                </StackPanel>
+
+            </Grid>
+        </Border>
+
+
+        <!--  The Left MenuBar Section  -->
+        <Border
+            Width="80"
+            HorizontalAlignment="Left"
+            CornerRadius="0 0 0 40"
+            Style="{StaticResource navMenuBar}">
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="1*" />
+                </Grid.RowDefinitions>
+
+                <StackPanel Margin="10">
+
+                    <!--  Logged in user  -->
+                    <StackPanel Orientation="Horizontal">
+                        <Button
+                            Width="50"
+                            Height="50"
+                            Margin="5,5,0,0"
+                            Command=""
+                            Opacity="50"
+                            Style="{StaticResource logoButton}">
+                            <Button.ContentTemplate>
+                                <DataTemplate>
+                                    <Border
+                                        Width="40"
+                                        Height="40"
+                                        Margin="0,0,0,0"
+                                        CornerRadius="10">
+                                        <Border.Background>
+                                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
+                                                <GradientStop Offset="0" Color="#7F7CF1" />
+                                                <GradientStop Offset="1" Color="#D3B7FF" />
+                                            </LinearGradientBrush>
+                                        </Border.Background>
+
+
+
+                                        <TextBlock
+                                            Margin="0,2,0,2"
+                                            VerticalAlignment="Center"
+                                            FontFamily="{StaticResource NeoSansStdMedium}"
+                                            FontSize="22"
+                                            Foreground="#ffffff"
+                                            Text="PC"
+                                            TextAlignment="Center"
+                                            ToolTip="The logged in user"
+                                            ToolTipService.InitialShowDelay="500" />
+                                    </Border>
+                                </DataTemplate>
+                            </Button.ContentTemplate>
+                        </Button>
+
+                        <StackPanel Margin="10,10,0,0" VerticalAlignment="Center">
+                            <TextBlock
+                                Width="110"
+                                Margin="0,2,0,5"
+                                FontFamily="{StaticResource NeoSansStd}"
+                                FontSize="15"
+                                Foreground="#C2CFFF"
+                                Text="P Centellini"
+                                TextWrapping="Wrap" />
+                            <TextBlock
+                                FontFamily="{StaticResource NeoSansStd}"
+                                FontSize="11"
+                                Foreground="#7788bf"
+                                Text="Beta v0.9" />
+                        </StackPanel>
+                    </StackPanel>
+
+                    <Separator
+                        Height="1.8"
+                        Margin="0,17,0,10"
+                        Background="LightSlateGray" />
+
+                    <!--  Assignments List Icon  -->
+
+                    <!--  Person Icon (Consultants list)  -->
+
+                </StackPanel>
+
+                <StackPanel
+                    Grid.Row="1"
+                    VerticalAlignment="Bottom"
+                    Orientation="Vertical">
+
+                    <!--  Settings Icon  -->
+
+                    <!--  Shutdown Icon  -->
+
+                </StackPanel>
+
+            </Grid>
+        </Border>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="80" />
+            </Grid.ColumnDefinitions>
+
+            <!--  The Content Section  -->
+            <Border Background="White" BorderThickness="1">
+                <Border.BorderBrush>
+                    <LinearGradientBrush>
+                        <GradientStop Offset="0" Color="{StaticResource SwayGradientDark}" />
+                        <GradientStop Offset="1" Color="{StaticResource SwayGradientAquaBlue}" />
+                    </LinearGradientBrush>
+                </Border.BorderBrush>
+                <ContentControl Content="{Binding Navigation.CurrentView}" />
+            </Border>
+
+            <!--  The Right Section  -->
+            <Border
+                Grid.Column="1"
+                Width="80"
+                HorizontalAlignment="Right"
+                BorderThickness="1"
+                CornerRadius="0 0 40 0">
+                <Border.BorderBrush>
+                    <LinearGradientBrush>
+                        <GradientStop Offset="0" Color="{StaticResource SwayGradientDark}" />
+                        <GradientStop Offset="1" Color="{StaticResource SwayGradientAquaBlue}" />
+                    </LinearGradientBrush>
+                </Border.BorderBrush>
+                <Border.Background>
+                    <LinearGradientBrush>
+                        <GradientStop Offset="0" Color="{StaticResource SwayGradientDark}" />
+                        <GradientStop Offset="1" Color="{StaticResource SwayGradientAquaBlue}" />
+                    </LinearGradientBrush>
+                </Border.Background>
+            </Border>
+        </Grid>
+
+    </DockPanel>
 </mah:MetroWindow>

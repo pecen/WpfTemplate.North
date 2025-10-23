@@ -1,18 +1,22 @@
-﻿<prism:PrismApplication x:Class="WpfTemplate.North.UI.Shell.App"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:WpfTemplate.North.UI.Shell"
-             xmlns:prism="http://prismlibrary.com/">
+﻿<prism:PrismApplication
+    x:Class="WpfTemplate.North.UI.Shell.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:WpfTemplate.North.UI.Shell"
+    xmlns:prism="http://prismlibrary.com/">
     <prism:PrismApplication.Resources>
 
-		<ResourceDictionary>
-			<ResourceDictionary.MergedDictionaries>
-				<!--  The Mahapps.Metro Styling  -->
-				<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
-				<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
-				<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Blue.xaml" />
-			</ResourceDictionary.MergedDictionaries>
-		</ResourceDictionary>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!--  The Mahapps.Metro Styling  -->
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Blue.xaml" />
 
-	</prism:PrismApplication.Resources>
+                <!--  The WpfTemplate.North Styling  -->
+                <!--<ResourceDictionary Source="pack://application:,,,/WpfTemplate.North.UI.Common;component/Styles/ResourceLibrary.xaml" />-->
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+
+    </prism:PrismApplication.Resources>
 </prism:PrismApplication>
