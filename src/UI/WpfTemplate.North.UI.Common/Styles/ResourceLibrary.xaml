@@ -1,0 +1,21 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <BitmapImage x:Key="iCalcIcon" UriSource="pack://application:,,,/iCalculate.UI.Common;component/Styles/Icons/icalculate_high_resolution_logo_48x48.ico" />
+
+    <FontFamily x:Key="NeoSansStdMedium">pack://application:,,,/WpfTemplate.North.UI.Common;component/Styles/Fonts/#Neo Sans Std Medium</FontFamily>
+    <FontFamily x:Key="NeoSansStd">pack://application:,,,/WpfTemplate.North.UI.Common;component/Styles/Fonts/#Neo Sans Std</FontFamily>
+
+    <!--  Merge all resources to one Dictionary  -->
+    <!--  Remember that order matters!  -->
+    <ResourceDictionary.MergedDictionaries>
+
+        <!--  Load common resources  -->
+        <ResourceDictionary Source="/Sway.UI.Common;component/Styles/Colors/AppColors.xaml" />
+        <ResourceDictionary Source="/WpfTemplate.North.UI.Common;component/Styles/Icons/AppIcons.xaml" />
+
+        <!--  The Styling Theme  -->
+        <ResourceDictionary Source="/WpfTemplate.North.UI.Common;component/Styles/Themes/Titlebar.WpfTemplate.North.xaml" />
+
+    </ResourceDictionary.MergedDictionaries>
+
+</ResourceDictionary>

@@ -1,0 +1,45 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:presentationOptions="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options">
+
+    <!--  Common Ground  -->
+    <Color x:Key="colorTransparent">Transparent</Color>
+
+    <!--  Neonode Colors  -->
+    <SolidColorBrush x:Key="NeoAccentDark" Color="#1e3431" />
+    <SolidColorBrush x:Key="NeoLogoDark" Color="#015382" />
+    <SolidColorBrush x:Key="NeoSemiAquaBlue" Color="#7eb4ea" />
+    <SolidColorBrush x:Key="NeoAquaBlue" Color="#67aad7" />
+    <SolidColorBrush x:Key="NeoLightBlue" Color="#99c7e4" />
+    <SolidColorBrush x:Key="NeoSemiDarkBlue" Color="#569de5" />
+
+    <!--  Menu Border Gradient  -->
+    <Color x:Key="NeoGradientDark">#002e4b</Color>
+    <Color x:Key="NeoGradientSemiDarkBlue">#569de5</Color>
+    <Color x:Key="NeoGradientAquaBlue">#67aad7</Color>
+
+    <!--  Nav  -->
+    <SolidColorBrush x:Key="Nav.Default" Color="Transparent" />
+    <SolidColorBrush x:Key="Nav.Over" Color="#396a84" />
+    <SolidColorBrush x:Key="Nav.Click" Color="#87b7d8" />
+
+    <!--  App Accent Dark  -->
+    <SolidColorBrush x:Key="AccentDark" Color="#164863" />
+    <SolidColorBrush x:Key="AccentDarkOver" Color="#396a84" />
+    <SolidColorBrush x:Key="AccentDarkClick" Color="#66a3c5" />
+    <!--  View Default Background  -->
+    <SolidColorBrush x:Key="ViewDefaultBackground" Color="#ececec" />
+    <!--  Window Background  -->
+    <SolidColorBrush x:Key="WindowBackground" Color="#ffffff" />
+    <!--  Task Status Background  -->
+    <SolidColorBrush x:Key="TaskStatusBackground" Color="#f6f6f6" />
+    <!--  Default Text Colour  -->
+    <SolidColorBrush x:Key="DefaultText" Color="#0caff4" />
+    <!--  On Accent  -->
+    <SolidColorBrush x:Key="OnAccent" Color="#ffffff" />
+    <!--  Placeholder Text Colour  -->
+    <SolidColorBrush x:Key="PlaceholderText" Color="#130909" />
+    <SolidColorBrush x:Key="PlaceholderBorderText" Color="#373737" />
+
+</ResourceDictionary>

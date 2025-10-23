@@ -8,7 +8,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Styles\Fonts\NeoSansStd-Medium.otf" />
+    <None Remove="Styles\Fonts\NeoSansStd-Regular.otf" />
+    <None Remove="Styles\Icons\icalculate_high_resolution_logo_48x48.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Prism.Core" Version="8.1.97" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Styles\Fonts\NeoSansStd-Medium.otf" />
+    <Resource Include="Styles\Fonts\NeoSansStd-Regular.otf" />
+    <Resource Include="Styles\Icons\icalculate_high_resolution_logo_48x48.ico" />
   </ItemGroup>
 
 </Project>
