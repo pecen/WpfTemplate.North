@@ -11,6 +11,7 @@
     <None Remove="Styles\Fonts\NeoSansStd-Medium.otf" />
     <None Remove="Styles\Fonts\NeoSansStd-Regular.otf" />
     <None Remove="Styles\Icons\icalculate_high_resolution_logo_48x48.ico" />
+    <None Remove="Styles\Images\iCalculateLogo-no-background_220x49.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -21,6 +22,7 @@
     <Resource Include="Styles\Fonts\NeoSansStd-Medium.otf" />
     <Resource Include="Styles\Fonts\NeoSansStd-Regular.otf" />
     <Resource Include="Styles\Icons\icalculate_high_resolution_logo_48x48.ico" />
+    <Resource Include="Styles\Images\iCalculateLogo-no-background_220x49.png" />
   </ItemGroup>
 
 </Project>

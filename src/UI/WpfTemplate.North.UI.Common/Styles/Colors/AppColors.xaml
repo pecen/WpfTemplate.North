@@ -5,8 +5,9 @@
 
     <!--  Common Ground  -->
     <Color x:Key="colorTransparent">Transparent</Color>
+    <SolidColorBrush x:Key="BrushTransparent" Color="{StaticResource colorTransparent}" />
 
-    <!--  Neonode Colors  -->
+    <!--  Template.North Colors  -->
     <SolidColorBrush x:Key="NeoAccentDark" Color="#1e3431" />
     <SolidColorBrush x:Key="NeoLogoDark" Color="#015382" />
     <SolidColorBrush x:Key="NeoSemiAquaBlue" Color="#7eb4ea" />

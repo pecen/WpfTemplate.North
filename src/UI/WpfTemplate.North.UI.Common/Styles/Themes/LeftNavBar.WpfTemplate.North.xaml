@@ -1,0 +1,57 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/WpfTemplate.North.UI.Common;component/Styles/Colors/AppColors.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <!--  Nav Menu Border  -->
+    <Style x:Key="navMenuBar" TargetType="Border">
+        <Setter Property="Background">
+            <Setter.Value>
+                <LinearGradientBrush>
+                    <GradientStop Offset="0" Color="{StaticResource NeoGradientDark}" />
+                    <GradientStop Offset="1" Color="{StaticResource NeoGradientAquaBlue}" />
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+
+        <Style.Triggers>
+            <EventTrigger RoutedEvent="Border.MouseEnter">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation
+                                Storyboard.TargetProperty="(Border.Width)"
+                                To="170"
+                                Duration="0:0:.2" />
+                            <!--<DoubleAnimation
+                                Storyboard.TargetProperty="(Border.Width)"
+                                To="170"
+                                Duration="0:0:.2" />-->
+                            <!--<DoubleAnimation
+                                Storyboard.TargetProperty="(Button.Width)"
+                                To="200"
+                                Duration="0:0:.2" />-->
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
+            <EventTrigger RoutedEvent="Border.MouseLeave">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation
+                                Storyboard.TargetProperty="(Border.Width)"
+                                To="80"
+                                Duration="0:0:.2" />
+                            <!--<DoubleAnimation
+                                Storyboard.TargetProperty="(Button.Width)"
+                                To="70"
+                                Duration="0:0:.2" />-->
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
+        </Style.Triggers>
+    </Style>
+</ResourceDictionary>

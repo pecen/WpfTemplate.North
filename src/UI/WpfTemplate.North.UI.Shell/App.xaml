@@ -14,7 +14,8 @@
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Blue.xaml" />
 
                 <!--  The WpfTemplate.North Styling  -->
-                <!--<ResourceDictionary Source="pack://application:,,,/WpfTemplate.North.UI.Common;component/Styles/ResourceLibrary.xaml" />-->
+                <!--<ResourceDictionary Source="/WpfTemplate.North.UI.Common;component/Styles/Colors/AppColors.xaml" />-->
+                <ResourceDictionary Source="pack://application:,,,/WpfTemplate.North.UI.Common;component/Styles/ResourceLibrary.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
 
