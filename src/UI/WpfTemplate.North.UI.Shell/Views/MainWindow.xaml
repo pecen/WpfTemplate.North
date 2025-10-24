@@ -7,17 +7,21 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:enums="clr-namespace:WpfTemplate.North.UI.Common.Enums;assembly=WpfTemplate.North.UI.Common"
     xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:local="clr-namespace:WpfTemplate.North.UI.Shell"
     xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:prism="http://prismlibrary.com/"
     Title="{Binding Title}"
     Width="1330"
     Height="780"
+    MinWidth="500"
+    MinHeight="330"
     prism:ViewModelLocator.AutoWireViewModel="True"
-    AllowsTransparency="True"
+	AllowsTransparency="False"
     Background="Transparent"
     BorderThickness="0"
     IgnoreTaskbarOnMaximize="True"
+    ResizeMode="CanResize"
     ShowCloseButton="False"
     ShowMaxRestoreButton="False"
     ShowMinButton="False"
@@ -26,11 +30,18 @@
     WindowStyle="None"
     mc:Ignorable="d">
 
-	<i:Interaction.Behaviors>
-		<behaviors:CloseWindowBehavior />
-	</i:Interaction.Behaviors>
+    <WindowChrome.WindowChrome>
+        <WindowChrome
+            CaptionHeight="50"
+            ResizeBorderThickness="8"
+            UseAeroCaptionButtons="False" />
+    </WindowChrome.WindowChrome>
 
-	<Window.Resources>
+    <i:Interaction.Behaviors>
+        <behaviors:CloseWindowBehavior />
+    </i:Interaction.Behaviors>
+
+    <Window.Resources>
         <Storyboard x:Key="SlideOnLoad">
             <DoubleAnimation
                 Storyboard.TargetProperty="Opacity"
@@ -95,7 +106,8 @@
                     Grid.Column="2"
                     Margin="22,15,0,15"
                     HorizontalAlignment="Left"
-                    Orientation="Horizontal">
+                    Orientation="Horizontal"
+                    WindowChrome.IsHitTestVisibleInChrome="True">
                     <Button
                         Command="{Binding MinimizeWindowCommand}"
                         Style="{StaticResource topButton}"
@@ -104,7 +116,9 @@
                         <Ellipse Fill="#ffbf2f" Style="{StaticResource topButtonEllipse}" />
                     </Button>
                     <Button
+                        x:Name="MaximizeButton"
                         Margin="7,0"
+                        behaviors:SnapLayoutsBehavior.MaximizeElement="{Binding ElementName=MaxButton}"
                         Command="{Binding MaximizeWindowCommand}"
                         Style="{StaticResource topButton}"
                         ToolTip="{Binding MaximizeBtnTooltip}"
