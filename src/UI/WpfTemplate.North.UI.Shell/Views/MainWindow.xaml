@@ -14,10 +14,12 @@
     Width="1330"
     Height="780"
     prism:ViewModelLocator.AutoWireViewModel="True"
-    AllowsTransparency="True"
-    Background="Transparent"
+    behaviors:NativeRoundedCornersBehavior.Enable="True"
+    AllowsTransparency="False"
+    Background="White"
     BorderThickness="0"
     IgnoreTaskbarOnMaximize="True"
+    ResizeMode="CanResize"
     ShowCloseButton="False"
     ShowMaxRestoreButton="False"
     ShowMinButton="False"
@@ -31,140 +33,144 @@
 	</i:Interaction.Behaviors>
 
 	<Window.Resources>
-        <Storyboard x:Key="SlideOnLoad">
-            <DoubleAnimation
+		<Storyboard x:Key="SlideOnLoad">
+			<DoubleAnimation
                 Storyboard.TargetProperty="Opacity"
                 From="0.0"
                 To="1.0"
                 Duration="0:0:1">
-                <DoubleAnimation.EasingFunction>
-                    <CubicEase EasingMode="EaseOut" />
-                </DoubleAnimation.EasingFunction>
-            </DoubleAnimation>
-            <ThicknessAnimation
+				<DoubleAnimation.EasingFunction>
+					<CubicEase EasingMode="EaseOut" />
+				</DoubleAnimation.EasingFunction>
+			</DoubleAnimation>
+			<ThicknessAnimation
                 Storyboard.TargetProperty="Margin"
                 From="0,100,0,0"
                 To="0,0,0,0"
                 Duration="0:0:1">
-                <ThicknessAnimation.EasingFunction>
-                    <CubicEase EasingMode="EaseOut" />
-                </ThicknessAnimation.EasingFunction>
-            </ThicknessAnimation>
-        </Storyboard>
-    </Window.Resources>
+				<ThicknessAnimation.EasingFunction>
+					<CubicEase EasingMode="EaseOut" />
+				</ThicknessAnimation.EasingFunction>
+			</ThicknessAnimation>
+		</Storyboard>
+	</Window.Resources>
 
-    <DockPanel>
-        <DockPanel.Triggers>
-            <EventTrigger RoutedEvent="FrameworkElement.Loaded">
-                <BeginStoryboard Storyboard="{StaticResource SlideOnLoad}" />
-            </EventTrigger>
-        </DockPanel.Triggers>
+	<DockPanel>
+		<DockPanel.Triggers>
+			<EventTrigger RoutedEvent="FrameworkElement.Loaded">
+				<BeginStoryboard Storyboard="{StaticResource SlideOnLoad}" />
+			</EventTrigger>
+		</DockPanel.Triggers>
 
-        <!--  The Title bar section  -->
-        <Border
+		<!--  The Title bar section  -->
+		<Border
             Height="50"
             Background="White"
             BorderBrush="{StaticResource NeoAccentDark}"
             BorderThickness="1"
-            CornerRadius="40 40 0 0"
+            CornerRadius="0"
             DockPanel.Dock="Top">
-            <Border.InputBindings>
-                <MouseBinding Command="{Binding MoveWindowCommand}" MouseAction="LeftClick" />
-                <MouseBinding Command="{Binding MaximizeWindowCommand}" MouseAction="LeftDoubleClick" />
-            </Border.InputBindings>
+			<Border.InputBindings>
+				<MouseBinding Command="{Binding MoveWindowCommand}" MouseAction="LeftClick" />
+				<MouseBinding Command="{Binding MaximizeWindowCommand}" MouseAction="LeftDoubleClick" />
+			</Border.InputBindings>
 
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="1*" />
-                    <ColumnDefinition Width="100" />
-                </Grid.ColumnDefinitions>
+			<Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="Auto" />
+					<ColumnDefinition Width="1*" />
+					<ColumnDefinition Width="160" />
+				</Grid.ColumnDefinitions>
 
-                <!--  The Titlebar  -->
-                <!--  Template Logo with Application Name  -->
-                <Image Margin="17,5,0,5" Source="{StaticResource iCalculateLogo}" />
+				<!--  The Titlebar  -->
+				<!--  Template Logo with Application Name  -->
+				<Image Margin="17,5,0,5" Source="{StaticResource iCalculateLogo}" />
 
-                <TextBlock
+				<TextBlock
                     Grid.ColumnSpan="3"
                     HorizontalAlignment="Center"
                     FontFamily="Arial"
                     Style="{StaticResource logoText}" />
 
-                <!--  Buttons with Ellipses  -->
-                <StackPanel
+				<!--  Buttons with Ellipses  -->
+				<StackPanel
                     Grid.Column="2"
-                    Margin="22,15,0,15"
-                    HorizontalAlignment="Left"
+                    Margin="10,5,15,5"
+                    HorizontalAlignment="Right"
                     Orientation="Horizontal">
-                    <Button
+					<Button
                         Command="{Binding MinimizeWindowCommand}"
+						Padding="12"
                         Style="{StaticResource topButton}"
                         ToolTip="Minimize Window"
                         ToolTipService.InitialShowDelay="500">
-                        <Ellipse Fill="#ffbf2f" Style="{StaticResource topButtonEllipse}" />
-                    </Button>
-                    <Button
-                        Margin="7,0"
+						<Ellipse Fill="#ffbf2f" Style="{StaticResource topButtonEllipse}" />
+					</Button>
+					<Button
+						Margin="7,0"
+						Padding="12"
+                        behaviors:SnapLayoutBehavior.IsMaximizeButton="True"
                         Command="{Binding MaximizeWindowCommand}"
                         Style="{StaticResource topButton}"
                         ToolTip="{Binding MaximizeBtnTooltip}"
                         ToolTipService.InitialShowDelay="500">
-                        <Ellipse Fill="#2acb42" Style="{StaticResource topButtonEllipse}" />
-                    </Button>
-                    <Button
+						<Ellipse Fill="#2acb42" Style="{StaticResource topButtonEllipse}" />
+					</Button>
+					<Button
                         Command="{Binding ShutdownWindowCommand}"
                         Style="{StaticResource topButton}"
+						Padding="12"
                         ToolTip="Close Application"
                         ToolTipService.InitialShowDelay="500">
-                        <Ellipse Fill="#ff6258" Style="{StaticResource topButtonEllipse}" />
-                    </Button>
-                </StackPanel>
+						<Ellipse Fill="#ff6258" Style="{StaticResource topButtonEllipse}" />
+					</Button>
+				</StackPanel>
 
-            </Grid>
-        </Border>
+			</Grid>
+		</Border>
 
 
-        <!--  The Left MenuBar Section  -->
-        <Border
+		<!--  The Left MenuBar Section  -->
+		<Border
             Width="80"
             HorizontalAlignment="Left"
-            CornerRadius="0 0 0 40"
+            CornerRadius="0"
             Style="{StaticResource navMenuBar}">
 
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="1*" />
-                </Grid.RowDefinitions>
+			<Grid>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto" />
+					<RowDefinition Height="1*" />
+				</Grid.RowDefinitions>
 
-                <StackPanel Margin="10">
+				<StackPanel Margin="10">
 
-                    <!--  Logged in user  -->
-                    <StackPanel Orientation="Horizontal">
-                        <Button
+					<!--  Logged in user  -->
+					<StackPanel Orientation="Horizontal">
+						<Button
                             Width="50"
                             Height="50"
                             Margin="5,5,0,0"
                             Command=""
                             Opacity="50"
                             Style="{StaticResource logoButton}">
-                            <Button.ContentTemplate>
-                                <DataTemplate>
-                                    <Border
+							<Button.ContentTemplate>
+								<DataTemplate>
+									<Border
                                         Width="40"
                                         Height="40"
                                         Margin="0,0,0,0"
                                         CornerRadius="10">
-                                        <Border.Background>
-                                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
-                                                <GradientStop Offset="0" Color="#7F7CF1" />
-                                                <GradientStop Offset="1" Color="#D3B7FF" />
-                                            </LinearGradientBrush>
-                                        </Border.Background>
+										<Border.Background>
+											<LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
+												<GradientStop Offset="0" Color="#7F7CF1" />
+												<GradientStop Offset="1" Color="#D3B7FF" />
+											</LinearGradientBrush>
+										</Border.Background>
 
 
 
-                                        <TextBlock
+										<TextBlock
                                             Margin="0,2,0,2"
                                             VerticalAlignment="Center"
                                             FontFamily="{StaticResource NeoSansStdMedium}"
@@ -174,13 +180,13 @@
                                             TextAlignment="Center"
                                             ToolTip="The logged in user"
                                             ToolTipService.InitialShowDelay="500" />
-                                    </Border>
-                                </DataTemplate>
-                            </Button.ContentTemplate>
-                        </Button>
+									</Border>
+								</DataTemplate>
+							</Button.ContentTemplate>
+						</Button>
 
-                        <StackPanel Margin="10,10,0,0" VerticalAlignment="Center">
-                            <TextBlock
+						<StackPanel Margin="10,10,0,0" VerticalAlignment="Center">
+							<TextBlock
                                 Width="110"
                                 Margin="0,2,0,5"
                                 FontFamily="{StaticResource NeoSansStd}"
@@ -188,32 +194,32 @@
                                 Foreground="#C2CFFF"
                                 Text="P Centellini"
                                 TextWrapping="Wrap" />
-                            <TextBlock
+							<TextBlock
                                 FontFamily="{StaticResource NeoSansStd}"
                                 FontSize="11"
                                 Foreground="#7788bf"
                                 Text="Beta v0.9" />
-                        </StackPanel>
-                    </StackPanel>
+						</StackPanel>
+					</StackPanel>
 
-                    <Separator
+					<Separator
                         Height="1.8"
                         Margin="0,17,0,10"
                         Background="LightSlateGray" />
 
-                    <!--  Assignments List Icon  -->
+					<!--  Assignments List Icon  -->
 
-                    <!--  Person Icon (Consultants list)  -->
+					<!--  Person Icon (Consultants list)  -->
 
-                </StackPanel>
+				</StackPanel>
 
-                <StackPanel
+				<StackPanel
                     Grid.Row="1"
                     VerticalAlignment="Bottom"
                     Orientation="Vertical">
 
-                    <!--  Settings Icon  -->
-                    <controls:MenuBarButton
+					<!--  Settings Icon  -->
+					<controls:MenuBarButton
                         Margin="10,20,10,0"
                         VerticalAlignment="Bottom"
                         ButtonMargin="10,10,0,10"
@@ -227,8 +233,8 @@
                         ViewboxHeight="25"
                         ViewboxWidth="25" />
 
-                    <!--  Shutdown Icon  -->
-                    <controls:MenuBarButton
+					<!--  Shutdown Icon  -->
+					<controls:MenuBarButton
                         Margin="10,0,10,20"
                         VerticalAlignment="Bottom"
                         ButtonMargin="10,0 0 10"
@@ -243,49 +249,49 @@
                         ViewboxHeight="25"
                         ViewboxWidth="25 " />
 
-                </StackPanel>
+				</StackPanel>
 
-            </Grid>
-        </Border>
+			</Grid>
+		</Border>
 
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*" />
-                <ColumnDefinition Width="80" />
-            </Grid.ColumnDefinitions>
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="1*" />
+				<ColumnDefinition Width="80" />
+			</Grid.ColumnDefinitions>
 
-            <!--  The Content Section  -->
-            <Border Background="White" BorderThickness="1">
-                <Border.BorderBrush>
-                    <LinearGradientBrush>
-                        <GradientStop Offset="0" Color="{StaticResource NeoGradientDark}" />
-                        <GradientStop Offset="1" Color="{StaticResource NeoGradientAquaBlue}" />
-                    </LinearGradientBrush>
-                </Border.BorderBrush>
-                <ContentControl Content="{Binding Navigation.CurrentView}" />
-            </Border>
+			<!--  The Content Section  -->
+			<Border Background="White" BorderThickness="1">
+				<Border.BorderBrush>
+					<LinearGradientBrush>
+						<GradientStop Offset="0" Color="{StaticResource NeoGradientDark}" />
+						<GradientStop Offset="1" Color="{StaticResource NeoGradientAquaBlue}" />
+					</LinearGradientBrush>
+				</Border.BorderBrush>
+				<ContentControl Content="{Binding Navigation.CurrentView}" />
+			</Border>
 
-            <!--  The Right Section  -->
-            <Border
+			<!--  The Right Section  -->
+			<Border
                 Grid.Column="1"
                 Width="80"
                 HorizontalAlignment="Right"
                 BorderThickness="1"
-                CornerRadius="0 0 40 0">
-                <Border.BorderBrush>
-                    <LinearGradientBrush>
-                        <GradientStop Offset="0" Color="{StaticResource NeoGradientDark}" />
-                        <GradientStop Offset="1" Color="{StaticResource NeoGradientAquaBlue}" />
-                    </LinearGradientBrush>
-                </Border.BorderBrush>
-                <Border.Background>
-                    <LinearGradientBrush>
-                        <GradientStop Offset="0" Color="{StaticResource NeoGradientDark}" />
-                        <GradientStop Offset="1" Color="{StaticResource NeoGradientAquaBlue}" />
-                    </LinearGradientBrush>
-                </Border.Background>
-            </Border>
-        </Grid>
+                CornerRadius="0">
+				<Border.BorderBrush>
+					<LinearGradientBrush>
+						<GradientStop Offset="0" Color="{StaticResource NeoGradientDark}" />
+						<GradientStop Offset="1" Color="{StaticResource NeoGradientAquaBlue}" />
+					</LinearGradientBrush>
+				</Border.BorderBrush>
+				<Border.Background>
+					<LinearGradientBrush>
+						<GradientStop Offset="0" Color="{StaticResource NeoGradientDark}" />
+						<GradientStop Offset="1" Color="{StaticResource NeoGradientAquaBlue}" />
+					</LinearGradientBrush>
+				</Border.Background>
+			</Border>
+		</Grid>
 
-    </DockPanel>
+	</DockPanel>
 </mah:MetroWindow>
